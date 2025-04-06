@@ -1,0 +1,14 @@
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\bin\Debug\net8.0\QB_CoA_Lib.deps.json
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\bin\Debug\net8.0\QB_CoA_Lib.dll
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\bin\Debug\net8.0\QB_CoA_Lib.pdb
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.csproj.AssemblyReference.cache
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\Interop.QBFC16Lib.dll
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.csproj.ResolveComReference.cache
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.AssemblyInfoInputs.cache
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.AssemblyInfo.cs
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.csproj.CoreCompileInputs.cache
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.dll
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\refint\QB_CoA_Lib.dll
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\QB_CoA_Lib.pdb
+C:\Users\DarbhaV\Documents\Coas\ChartOfAccounts\QB_CoA_Lib\obj\Debug\net8.0\ref\QB_CoA_Lib.dll

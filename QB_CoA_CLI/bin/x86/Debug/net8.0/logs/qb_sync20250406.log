@@ -1,0 +1,76 @@
+2025-04-06 22:50:04.961 +00:00 [INF] ChartOfAccountReader Initialized.
+2025-04-06 22:50:06.381 +00:00 [INF] account type 	 	 	 account number 	 	 	 name
+2025-04-06 22:50:06.397 +00:00 [INF] Successfully retrieved Accumulated Depreciation from QB
+2025-04-06 22:50:06.406 +00:00 [INF] Successfully retrieved Furniture and Equipment from QB
+2025-04-06 22:50:06.413 +00:00 [INF] Successfully retrieved Venkata Atchuta Bheemeswara from QB
+2025-04-06 22:50:06.422 +00:00 [INF] Successfully retrieved Payroll Liabilities from QB
+2025-04-06 22:50:06.430 +00:00 [INF] Successfully retrieved Opening Balance Equity from QB
+2025-04-06 22:50:06.439 +00:00 [INF] Successfully retrieved Owners Draw from QB
+2025-04-06 22:50:06.448 +00:00 [INF] Successfully retrieved Owners Equity from QB
+2025-04-06 22:50:06.458 +00:00 [INF] Successfully retrieved Consulting Income from QB
+2025-04-06 22:50:06.470 +00:00 [INF] Successfully retrieved Sales - Hardware from QB
+2025-04-06 22:50:06.479 +00:00 [INF] Successfully retrieved Sales - Software from QB
+2025-04-06 22:50:06.489 +00:00 [INF] Successfully retrieved Sales - Support and Maintenance from QB
+2025-04-06 22:50:06.498 +00:00 [INF] Successfully retrieved Shipping and Delivery Income from QB
+2025-04-06 22:50:06.507 +00:00 [INF] Successfully retrieved Freight and Shipping Costs from QB
+2025-04-06 22:50:06.516 +00:00 [INF] Successfully retrieved Merchant Account Fees from QB
+2025-04-06 22:50:06.527 +00:00 [INF] Successfully retrieved Purchases - Hardware for Resale from QB
+2025-04-06 22:50:06.543 +00:00 [INF] Successfully retrieved Purchases - Software for Resale from QB
+2025-04-06 22:50:06.564 +00:00 [INF] Successfully retrieved Advertising and Promotion from QB
+2025-04-06 22:50:06.574 +00:00 [INF] Successfully retrieved Automobile Expense from QB
+2025-04-06 22:50:06.586 +00:00 [INF] Successfully retrieved Bank Service Charges from QB
+2025-04-06 22:50:06.600 +00:00 [INF] Successfully retrieved Computer and Internet Expenses from QB
+2025-04-06 22:50:06.615 +00:00 [INF] Successfully retrieved Continuing Education from QB
+2025-04-06 22:50:06.625 +00:00 [INF] Successfully retrieved Depreciation Expense from QB
+2025-04-06 22:50:06.637 +00:00 [INF] Successfully retrieved Dues and Subscriptions from QB
+2025-04-06 22:50:06.647 +00:00 [INF] Successfully retrieved Insurance Expense from QB
+2025-04-06 22:50:06.656 +00:00 [INF] Successfully retrieved Interest Expense from QB
+2025-04-06 22:50:06.669 +00:00 [INF] Successfully retrieved Meals and Entertainment from QB
+2025-04-06 22:50:06.676 +00:00 [INF] Successfully retrieved Narendra from QB
+2025-04-06 22:50:06.686 +00:00 [INF] Successfully retrieved Office Supplies from QB
+2025-04-06 22:50:06.698 +00:00 [INF] Successfully retrieved Payroll Expenses from QB
+2025-04-06 22:50:06.708 +00:00 [INF] Successfully retrieved Professional Fees from QB
+2025-04-06 22:50:06.717 +00:00 [INF] Successfully retrieved Rent Expense from QB
+2025-04-06 22:50:06.731 +00:00 [INF] Successfully retrieved Telephone Expense from QB
+2025-04-06 22:50:06.745 +00:00 [INF] Successfully retrieved Travel Expense from QB
+2025-04-06 22:50:06.756 +00:00 [INF] Successfully retrieved Utilities from QB
+2025-04-06 22:50:06.780 +00:00 [INF] Successfully retrieved Ask My Accountant from QB
+2025-04-06 22:50:06.787 +00:00 [INF] ChartOfAccountReader Completed.
+2025-04-06 23:00:26.973 +00:00 [INF] ChartOfAccountReader Initialized.
+2025-04-06 23:00:30.220 +00:00 [INF] account type 	 	 	 account number 	 	 	 name
+2025-04-06 23:00:30.242 +00:00 [INF] Successfully retrieved Accumulated Depreciation from QB
+2025-04-06 23:00:30.272 +00:00 [INF] Successfully retrieved Furniture and Equipment from QB
+2025-04-06 23:00:30.287 +00:00 [INF] Successfully retrieved Venkata Atchuta Bheemeswara from QB
+2025-04-06 23:00:30.319 +00:00 [INF] Successfully retrieved Payroll Liabilities from QB
+2025-04-06 23:00:30.336 +00:00 [INF] Successfully retrieved Opening Balance Equity from QB
+2025-04-06 23:00:30.355 +00:00 [INF] Successfully retrieved Owners Draw from QB
+2025-04-06 23:00:30.378 +00:00 [INF] Successfully retrieved Owners Equity from QB
+2025-04-06 23:00:30.394 +00:00 [INF] Successfully retrieved Consulting Income from QB
+2025-04-06 23:00:30.419 +00:00 [INF] Successfully retrieved Sales - Hardware from QB
+2025-04-06 23:00:30.438 +00:00 [INF] Successfully retrieved Sales - Software from QB
+2025-04-06 23:00:30.451 +00:00 [INF] Successfully retrieved Sales - Support and Maintenance from QB
+2025-04-06 23:00:30.546 +00:00 [INF] Successfully retrieved Shipping and Delivery Income from QB
+2025-04-06 23:00:30.562 +00:00 [INF] Successfully retrieved Freight and Shipping Costs from QB
+2025-04-06 23:00:30.574 +00:00 [INF] Successfully retrieved Merchant Account Fees from QB
+2025-04-06 23:00:30.588 +00:00 [INF] Successfully retrieved Purchases - Hardware for Resale from QB
+2025-04-06 23:00:30.608 +00:00 [INF] Successfully retrieved Purchases - Software for Resale from QB
+2025-04-06 23:00:30.619 +00:00 [INF] Successfully retrieved Advertising and Promotion from QB
+2025-04-06 23:00:30.633 +00:00 [INF] Successfully retrieved Automobile Expense from QB
+2025-04-06 23:00:30.660 +00:00 [INF] Successfully retrieved Bank Service Charges from QB
+2025-04-06 23:00:30.676 +00:00 [INF] Successfully retrieved Computer and Internet Expenses from QB
+2025-04-06 23:00:30.701 +00:00 [INF] Successfully retrieved Continuing Education from QB
+2025-04-06 23:00:30.733 +00:00 [INF] Successfully retrieved Depreciation Expense from QB
+2025-04-06 23:00:30.836 +00:00 [INF] Successfully retrieved Dues and Subscriptions from QB
+2025-04-06 23:00:30.860 +00:00 [INF] Successfully retrieved Insurance Expense from QB
+2025-04-06 23:00:30.912 +00:00 [INF] Successfully retrieved Interest Expense from QB
+2025-04-06 23:00:30.983 +00:00 [INF] Successfully retrieved Meals and Entertainment from QB
+2025-04-06 23:00:30.997 +00:00 [INF] Successfully retrieved Narendra from QB
+2025-04-06 23:00:31.017 +00:00 [INF] Successfully retrieved Office Supplies from QB
+2025-04-06 23:00:31.035 +00:00 [INF] Successfully retrieved Payroll Expenses from QB
+2025-04-06 23:00:31.162 +00:00 [INF] Successfully retrieved Professional Fees from QB
+2025-04-06 23:00:31.180 +00:00 [INF] Successfully retrieved Rent Expense from QB
+2025-04-06 23:00:31.191 +00:00 [INF] Successfully retrieved Telephone Expense from QB
+2025-04-06 23:00:31.206 +00:00 [INF] Successfully retrieved Travel Expense from QB
+2025-04-06 23:00:31.217 +00:00 [INF] Successfully retrieved Utilities from QB
+2025-04-06 23:00:31.231 +00:00 [INF] Successfully retrieved Ask My Accountant from QB
+2025-04-06 23:00:31.235 +00:00 [INF] ChartOfAccountReader Completed.
