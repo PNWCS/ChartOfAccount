@@ -1,5 +1,7 @@
 ﻿using Serilog;
 
+using QB_CoA_Lib;
+
 namespace QB_CoA_Test
 {
     public class CommonMethods

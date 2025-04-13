@@ -5,16 +5,20 @@ using QBFC16Lib;              // QuickBooks session and API interaction
 using static QB_CoA_Test.CommonMethods;  // <-- Adjust if you store test helpers in a different namespace
 using QB_CoA_Test;
 using System.ComponentModel.Design;
+using Xunit.Abstractions;
 
 namespace QB_CoA_Test
 {
     [Collection("Sequential Tests")]
     public class CoAReaderTests
+
     {
+
         [Fact]
         public void AddAndReadMultipleAccounts_FromQuickBooks_And_Verify_Logs()
         {
             const int ACCOUNTS_COUNT = 5;
+            const int sleep_timer = 6000;
             var accountsToAdd = new List<ChartOfAccount>();
 
             // 1) Ensure Serilog has released file access before deleting old logs.
@@ -27,16 +31,16 @@ namespace QB_CoA_Test
             for (int i = 0; i < ACCOUNTS_COUNT; i++)
             {
                 string randomName = "TestAccount_" + Guid.NewGuid().ToString("N").Substring(0, 8);
-                string randomAccountNumber = "ACC-" + new Random().Next(1000, 9999);
+                string randomAccountNumber = "ACC-" + Random.Shared.Next(100, 999);
                 int randomCompanyID = new Random().Next(1, 999);
                 string accountType = "Bank"; // or "Expense", "Income", etc.
 
-                var account = new ChartOfAccount
+                var account = new ChartOfAccount(accountType, randomAccountNumber, randomName)
                 {
-                    Name = randomName,
-                    AccountType = accountType,
-                    AccountNumber = randomAccountNumber,
-                    CompanyID = randomCompanyID // to store the company’s ID
+                    //Name = randomName,
+                    //AccountType = accountType,;
+                    //AccountNumber = randomAccountNumber,
+                    CompanyID = randomCompanyID.ToString() // to store the company’s ID
                 };
 
                 accountsToAdd.Add(account);
@@ -45,6 +49,7 @@ namespace QB_CoA_Test
             // 3) Add these accounts directly to QuickBooks.
             using (var qbSession = new QuickBooksSession(AppConfig.QB_APP_NAME))
             {
+
                 foreach (var acct in accountsToAdd)
                 {
                     string qbID = AddAccount(
@@ -55,7 +60,10 @@ namespace QB_CoA_Test
                         acct.CompanyID
                     );
                     acct.QB_ID = qbID; // Store the returned QB ListID.
+
                 }
+
+
             }
 
             // 4) Query QuickBooks to retrieve all accounts.
@@ -65,19 +73,27 @@ namespace QB_CoA_Test
             foreach (var acct in accountsToAdd)
             {
                 var matchingAccount = allQBAccounts.FirstOrDefault(a => a.QB_ID == acct.QB_ID);
+
                 Assert.NotNull(matchingAccount);
                 Assert.Equal(acct.Name, matchingAccount.Name);
                 Assert.Equal(acct.AccountType, matchingAccount.AccountType);
                 Assert.Equal(acct.AccountNumber, matchingAccount.AccountNumber);
                 Assert.Equal(acct.CompanyID, matchingAccount.CompanyID);
-                
 
-            // 6) Cleanup: Delete the added accounts from QuickBooks.
+
+                // 6) Cleanup: Delete the added accounts from QuickBooks.
+
+            }
+            /* Added the sleeper function because in rare cases in 20% of so, if the system performance is at 100%, the program is getting executed but the qb is not updating at the same time as the program execution.
+            Due to that, the test cases fail during that 20% times, throwing an error or not deleting the newly added accounts data in QB and leave some accounts as it is. WORKAROUND -  either make the adder func and delete func async in future times so that, the program waits to add the data and waits to remove the data.            
+            */
+            Thread.Sleep(sleep_timer);
             using (var qbSession = new QuickBooksSession(AppConfig.QB_APP_NAME))
             {
-                foreach (var acct in accountsToAdd.Where(a => !string.IsNullOrEmpty(a.QB_ID)))
+
+                foreach (var accts in accountsToAdd.Where(a => !string.IsNullOrEmpty(a.QB_ID)))
                 {
-                    DeleteAccount(qbSession, acct.QB_ID);
+                    DeleteAccount(qbSession, accts.QB_ID);
                 }
             }
 
@@ -96,9 +112,9 @@ namespace QB_CoA_Test
             Assert.Contains("ChartOfAccountReader Completed", logContents);
 
             // 11) Verify that each retrieved account was logged properly.
-            foreach (var acct in accountsToAdd)
+            foreach (var accts in accountsToAdd)
             {
-                string expectedLogMessage = $"Successfully retrieved {acct.Name} from QB";
+                string expectedLogMessage = $"Successfully retrieved {accts.Name} from QB";
                 Assert.Contains(expectedLogMessage, logContents);
             }
         }
@@ -111,11 +127,11 @@ namespace QB_CoA_Test
             string name,
             string accountType,
             string accountNumber,
-            int companyID
+            string companyID
         )
         {
             IMsgSetRequest requestMsgSet = qbSession.CreateRequestSet();
-            IAccountAddRq accountAddRq = requestMsgSet.AppendAccountAddRq();
+            IAccountAdd accountAddRq = requestMsgSet.AppendAccountAddRq();
 
             accountAddRq.Name.SetValue(name);
             accountAddRq.AccountType.SetValue(ConvertStringToAccountType(accountType));
@@ -123,6 +139,7 @@ namespace QB_CoA_Test
             accountAddRq.Desc.SetValue(companyID);
 
             IMsgSetResponse responseMsgSet = qbSession.SendRequest(requestMsgSet);
+
             return ExtractListIDFromResponse(responseMsgSet);
         }
 
@@ -160,6 +177,7 @@ namespace QB_CoA_Test
 
             return accountRet.ListID?.GetValue()
                 ?? throw new Exception("ListID is missing in QuickBooks response.");
+
         }
 
         /// <summary>
@@ -173,6 +191,7 @@ namespace QB_CoA_Test
             listDelRq.ListID.SetValue(listID);
 
             IMsgSetResponse responseMsgSet = qbSession.SendRequest(requestMsgSet);
+
             WalkListDelResponse(responseMsgSet, listID);
         }
 

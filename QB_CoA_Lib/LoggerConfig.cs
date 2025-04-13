@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace QB_CoA_CLI
+namespace QB_CoA_Lib
 {
     public static class LoggerConfig
     {

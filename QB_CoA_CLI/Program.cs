@@ -1,2 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System.Data;
+using System.Reflection.PortableExecutable;
+using QB_CoA_Lib;
+
+namespace coaaccounts
+{
+    public class Sample
+    {
+        public static void Main(string[] args)
+        {
+            CoAReader.QueryAllCoAs();
+        }
+
+    }
+}
