@@ -124,7 +124,6 @@ namespace QB_CoA_Test
                 Debug.WriteLine($"AccountQuery status code: {response.StatusCode}, message: {response.StatusMessage}");
                 return null;
             }
-
             if (response.Detail is IAccountRet accountRet)
             {
                 return accountRet;
@@ -142,6 +141,7 @@ namespace QB_CoA_Test
 
             //// We expect exactly one match if the ListID is correct
             //return (IAccountRet?)accountRetList;
+
         }
 
         /// <summary>
