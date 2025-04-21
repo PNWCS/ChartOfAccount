@@ -46,8 +46,10 @@ namespace QB_CoA_Test
             // 3) Call the CoAAdder under test to add those CoAs into QuickBooks.
             using (var qbSession = new QuickBooksSession(AppConfig.QB_APP_NAME))
             {
-                var coAAdder = new CoAAdder(qbSession); // Adjust ctor if needed
-                coAAdder.AddCoAs(accountsToAdd);
+                //var coAAdder = new CoAAdder(qbSession); // Adjust ctor if needed
+                //coAAdder.AddCoAs(accountsToAdd);
+                CoAAdder.AddCustomers(accountsToAdd);
+
             }
 
             // 4) Verify each added CoA has a QB_ID. Fail if any are missing.
@@ -66,7 +68,11 @@ namespace QB_CoA_Test
                 {
                     var qbRet = QueryAccountByListID(qbSession, acct.QB_ID);
                     Assert.NotNull(qbRet);  // If null, we failed to find it in QB.
+<<<<<<< HEAD
+
+=======
                     
+>>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
                     // Optionally, you can also assert that fields match what was sent:
                     Assert.Equal(acct.Name, qbRet.Name.GetValue());
                     Assert.Equal(acct.AccountNumber, qbRet.AccountNumber?.GetValue());
@@ -122,13 +128,31 @@ namespace QB_CoA_Test
                 Debug.WriteLine($"AccountQuery status code: {response.StatusCode}, message: {response.StatusMessage}");
                 return null;
             }
+<<<<<<< HEAD
+
+=======
+>>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
+            if (response.Detail is IAccountRet accountRet)
+            {
+                return accountRet;
+            }
+            else if (response.Detail is IAccountRetList accountRetList && accountRetList.Count > 0)
+            {
+                return accountRetList.GetAt(0);
+            }
+
+            return null;
 
             // Extract the AccountRet object if present
-            IAccountRetList accountRetList = response.Detail as IAccountRetList;
-            if (accountRetList == null) return null;
+            //IAccountRetList accountRetList = response.Detail as IAccountRetList;
+            //if (accountRetList == null) return null;
 
-            // We expect exactly one match if the ListID is correct
-            return accountRetList;
+            //// We expect exactly one match if the ListID is correct
+            //return (IAccountRet?)accountRetList;
+<<<<<<< HEAD
+=======
+
+>>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
         }
 
         /// <summary>
@@ -139,10 +163,17 @@ namespace QB_CoA_Test
         {
             return accountType.ToLower() switch
             {
+<<<<<<< HEAD
+                "bank" => ENAccountType.atBank,
+                "expense" => ENAccountType.atExpense,
+                "income" => ENAccountType.atIncome,
+                _ => ENAccountType.atOtherAsset
+=======
                 "bank"    => ENAccountType.atBank,
                 "expense" => ENAccountType.atExpense,
                 "income"  => ENAccountType.atIncome,
                 _         => ENAccountType.atOtherAsset
+>>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
             };
         }
 
