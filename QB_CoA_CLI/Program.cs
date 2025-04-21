@@ -7,7 +7,7 @@ namespace coaaccounts
 {
     public class Sample
     {
-        
+
         public static void Main(string[] args)
 
 
@@ -27,13 +27,13 @@ namespace coaaccounts
 
             else { CoAAdder.AddCustomers(sampleAccounts); }
 
-           
 
 
 
 
 
-           // 
+
+            // 
         }
 
     }

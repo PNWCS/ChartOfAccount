@@ -68,7 +68,7 @@ namespace QB_CoA_Test
                 {
                     var qbRet = QueryAccountByListID(qbSession, acct.QB_ID);
                     Assert.NotNull(qbRet);  // If null, we failed to find it in QB.
-                    
+
                     // Optionally, you can also assert that fields match what was sent:
                     Assert.Equal(acct.Name, qbRet.Name.GetValue());
                     Assert.Equal(acct.AccountNumber, qbRet.AccountNumber?.GetValue());
@@ -152,10 +152,10 @@ namespace QB_CoA_Test
         {
             return accountType.ToLower() switch
             {
-                "bank"    => ENAccountType.atBank,
+                "bank" => ENAccountType.atBank,
                 "expense" => ENAccountType.atExpense,
-                "income"  => ENAccountType.atIncome,
-                _         => ENAccountType.atOtherAsset
+                "income" => ENAccountType.atIncome,
+                _ => ENAccountType.atOtherAsset
             };
         }
 
