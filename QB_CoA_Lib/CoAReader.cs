@@ -11,7 +11,7 @@ namespace QB_CoA_Lib
     {
         static CoAReader()
         {
-            LoggerConfig.ConfigureLogging(); // Safe to call (only initializes once)
+            // LoggerConfig.ConfigureLogging(); // Safe to call (only initializes once)
             Log.Information("ChartOfAccountReader Initialized.");
         }
         public static List<ChartOfAccount> QueryAllCoAs()
@@ -100,29 +100,58 @@ namespace QB_CoA_Lib
             {
                 var account = AccountRetList.GetAt(i);
                 string accountType = account.AccountType.GetValue().ToString();
+
                 if (accountType == "atBank")
                 {
                     accountType = "Bank";
-
                 }
                 else if (accountType == "atExpense")
                 {
                     accountType = "Expense";
                 }
-                else
+                else if (accountType == "atIncome")
                 {
                     accountType = "Income";
+                }
+                else if (accountType == "atCostOfGoodsSold")
+                {
+                    accountType = "Cost of Goods Sold";
+                }
+                else if (accountType == "atCreditCard")
+                {
+                    accountType = "Credit Card";
+                }
+                else if (accountType == "atEquity")
+                {
+                    accountType = "Equity";
+                }
+                else if (accountType == "atFixedAsset")
+                {
+                    accountType = "Fixed Asset";
+                }
+                else if (accountType == "atOtherExpense")
+                {
+                    accountType = "Other Expense";
+                }
+                else if (accountType == "atOtherIncome")
+                {
+                    accountType = "Other Income";
+                }
+                else
+                {
+                    accountType = "Other Asset";  // Default case
                 }
                 string accountNumber = account.AccountNumber?.GetValue() ?? "N/A";
                 var qb_id = account.ListID.GetValue();
                 string name = account.Name.GetValue();
                 string? desc = account.Desc?.GetValue();
                 Log.Information($"Successfully retrieved {name} from QB");
+                // Log.Information($"company id of {name}{qb_id}");
                 Log.Debug($"{accountType} \t \t \t {accountNumber} \t \t \t {name}");
                 var chartOfAccount = new ChartOfAccount(accountType, accountNumber, name)
                 {
                     QB_ID = qb_id,
-                    CompanyID = desc
+                    CompanyID = qb_id.ToString(),
 
                     // Set the QB_ID
                 };
