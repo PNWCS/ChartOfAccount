@@ -152,10 +152,10 @@ namespace QB_CoA_Test
             return accountType.ToLower() switch
             {
 
-                "bank"    => ENAccountType.atBank,
+                "bank" => ENAccountType.atBank,
                 "expense" => ENAccountType.atExpense,
-                "income"  => ENAccountType.atIncome,
-                _         => ENAccountType.atOtherAsset
+                "income" => ENAccountType.atIncome,
+                _ => ENAccountType.atOtherAsset
 
             };
         }
