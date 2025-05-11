@@ -15,15 +15,10 @@ namespace QB_CoA_Lib
         //public List<ChartOfAccount> accounts = new List<ChartOfAccount>();
         static CoAAdder()
         {
-
-           // LoggerConfig.ConfigureLogging(); // Safe to call (only initializes once)
+            // LoggerConfig.ConfigureLogging(); // Safe to call (only initializes once)
             Log.Information("CoAAdder Initialized.");
 
-
         }
-
-
-
 
         public static void AddCustomers(List<ChartOfAccount> accounts)
         {
@@ -38,19 +33,14 @@ namespace QB_CoA_Lib
                         acct.AccountType,
                         acct.AccountNumber,
                         acct.CompanyID
-                       
+
                     );
                     acct.QB_ID = qbID;
                     acct.Status = ChartOfAccount.ChartOfAccountStatus.Added;// Store the returned QB ListID.
 
                 }
-
-
-
             }
             Log.Information("CoAAdder Completed");
-
-
 
         }
 
@@ -113,7 +103,6 @@ namespace QB_CoA_Lib
                 ?? throw new Exception("ListID is missing in QuickBooks response.");
 
         }
-
 
     }
 }
