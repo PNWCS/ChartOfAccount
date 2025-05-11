@@ -10,6 +10,7 @@ using QBFC16Lib;                // QuickBooks Desktop SDK
 using static QB_CoA_Test.CommonMethods;
 using static QB_CoA_Lib.ChartOfAccount;
 
+
 namespace QB_CoA_Test
 {
     /// <summary>
@@ -27,7 +28,7 @@ namespace QB_CoA_Test
             //------------------------------------------------------------------
             const string DEFAULT_ACCOUNT_TYPE = "Expense";
             var initialAccounts = new List<ChartOfAccount>();
-            var rand = new Random();
+            var rand            = new Random();
 
             EnsureLogFileClosed();
             DeleteOldLogFiles();
@@ -36,8 +37,8 @@ namespace QB_CoA_Test
             for (int i = 0; i < 5; i++)
             {
                 string acctNumber = rand.Next(10000, 99999).ToString();
-                string acctName = $"TestCoA_{Guid.NewGuid():N}".Substring(0, 16);
-                string companyId = $"CID_{Guid.NewGuid():N}".Substring(0, 8);
+                string acctName   = $"TestCoA_{Guid.NewGuid():N}".Substring(0, 16);
+                string companyId  = $"CID_{Guid.NewGuid():N}".Substring(0, 8);
 
               initialAccounts.Add(new ChartOfAccount(DEFAULT_ACCOUNT_TYPE, acctNumber, acctName)
                 {
@@ -45,7 +46,7 @@ namespace QB_CoA_Test
                 });
             }
 
-            List<ChartOfAccount>? firstCompareResult = null;
+            List<ChartOfAccount>? firstCompareResult  = null;
             List<ChartOfAccount>? secondCompareResult = null;
 
             try
@@ -53,10 +54,12 @@ namespace QB_CoA_Test
                 //------------------------------------------------------------------
                 // ②  First compare → every account should be *Added* to QB
                 //------------------------------------------------------------------
+
                 firstCompareResult = CoAComparator.CompareAccounts(initialAccounts);
 
                 foreach (var acct in firstCompareResult
                                      .Where(a => initialAccounts.Any(x => x.Name.Trim().ToLower() == a.Name.Trim().ToLower())))
+
                 {
                     Assert.Equal(ChartOfAccountStatus.Added, acct.Status);
                 }
@@ -66,17 +69,18 @@ namespace QB_CoA_Test
                 //------------------------------------------------------------------
                 var updatedAccounts = new List<ChartOfAccount>(initialAccounts);
 
-                var acctToRemove = updatedAccounts[0];           // → Missing
-                var acctToRename = updatedAccounts[1];           // → Different
+                var acctToRemove    = updatedAccounts[0];           // → Missing
+                var acctToRename    = updatedAccounts[1];           // → Different
 
                 updatedAccounts.Remove(acctToRemove);
-               //acctToRename.Name += "_Mod";
+                //acctToRename.Name += "_Mod";
                 acctToRename.AccountType = "Income";  // Different from original "Expense"
 
 
                 //------------------------------------------------------------------
                 // ④  Second compare → expect Missing, Different, Unchanged
                 //------------------------------------------------------------------
+
                 secondCompareResult = CoAComparator.CompareAccounts(updatedAccounts);
                 // !--------change here
                 //var secondDict      = secondCompareResult.ToDictionary(a => a.CompanyID);
@@ -138,8 +142,7 @@ namespace QB_CoA_Test
 
                 foreach (var acct in accts)
                 {
-                   string expected = $"Account {acct.Name} is {acct.Status}.";
-                    Debug.WriteLine(expected);
+                    string expected = $"Account {acct.Name} is {acct.Status}.";
                     Assert.Contains(expected, logs);
                 }
             }
