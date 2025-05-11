@@ -16,7 +16,7 @@ namespace QB_CoA_Lib
         static CoAAdder()
         {
 
-            LoggerConfig.ConfigureLogging(); // Safe to call (only initializes once)
+           // LoggerConfig.ConfigureLogging(); // Safe to call (only initializes once)
             Log.Information("CoAAdder Initialized.");
 
 
@@ -38,8 +38,10 @@ namespace QB_CoA_Lib
                         acct.AccountType,
                         acct.AccountNumber,
                         acct.CompanyID
+                       
                     );
-                    acct.QB_ID = qbID; // Store the returned QB ListID.
+                    acct.QB_ID = qbID;
+                    acct.Status = ChartOfAccount.ChartOfAccountStatus.Added;// Store the returned QB ListID.
 
                 }
 
@@ -76,9 +78,19 @@ namespace QB_CoA_Lib
         {
             return accountType.ToLower() switch
             {
+                //"bank" => ENAccountType.atBank,
+                //"expense" => ENAccountType.atExpense,
+                //"income" => ENAccountType.atIncome,
+                //_ => ENAccountType.atOtherAsset
                 "bank" => ENAccountType.atBank,
                 "expense" => ENAccountType.atExpense,
                 "income" => ENAccountType.atIncome,
+                "cost of goods sold" => ENAccountType.atCostOfGoodsSold,
+                "credit card" => ENAccountType.atCreditCard,
+                "equity" => ENAccountType.atEquity,
+                "fixed asset" => ENAccountType.atFixedAsset,
+                "other expense" => ENAccountType.atOtherExpense,
+                "other income" => ENAccountType.atOtherIncome,
                 _ => ENAccountType.atOtherAsset
             };
         }
