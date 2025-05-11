@@ -28,7 +28,7 @@ namespace QB_CoA_Test
             //------------------------------------------------------------------
             const string DEFAULT_ACCOUNT_TYPE = "Expense";
             var initialAccounts = new List<ChartOfAccount>();
-            var rand            = new Random();
+            var rand = new Random();
 
             EnsureLogFileClosed();
             DeleteOldLogFiles();
@@ -37,20 +37,20 @@ namespace QB_CoA_Test
             for (int i = 0; i < 5; i++)
             {
                 string acctNumber = rand.Next(10000, 99999).ToString();
-                string acctName   = $"TestCoA_{Guid.NewGuid():N}".Substring(0, 16);
-                string companyId  = $"CID_{Guid.NewGuid():N}".Substring(0, 8);
+                string acctName = $"TestCoA_{Guid.NewGuid():N}".Substring(0, 16);
+                string companyId = $"CID_{Guid.NewGuid():N}".Substring(0, 8);
 
-              initialAccounts.Add(new ChartOfAccount(DEFAULT_ACCOUNT_TYPE, acctNumber, acctName)
+                initialAccounts.Add(new ChartOfAccount(DEFAULT_ACCOUNT_TYPE, acctNumber, acctName)
                 {
                     CompanyID = companyId   //  Used as the business-key when comparing
                 });
             }
 
-            List<ChartOfAccount>? firstCompareResult  = null;
+            List<ChartOfAccount>? firstCompareResult = null;
             List<ChartOfAccount>? secondCompareResult = null;
 
             try
-           {
+            {
                 //------------------------------------------------------------------
                 // ②  First compare → every account should be *Added* to QB
                 //------------------------------------------------------------------
@@ -69,8 +69,8 @@ namespace QB_CoA_Test
                 //------------------------------------------------------------------
                 var updatedAccounts = new List<ChartOfAccount>(initialAccounts);
 
-                var acctToRemove    = updatedAccounts[0];           // → Missing
-                var acctToRename    = updatedAccounts[1];           // → Different
+                var acctToRemove = updatedAccounts[0];           // → Missing
+                var acctToRename = updatedAccounts[1];           // → Different
 
                 updatedAccounts.Remove(acctToRemove);
                 //acctToRename.Name += "_Mod";
@@ -166,7 +166,7 @@ namespace QB_CoA_Test
             WalkListDelResponse(rsp, listID);
         }
 
-    private static void WalkListDelResponse(IMsgSetResponse rsp, string listID)
+        private static void WalkListDelResponse(IMsgSetResponse rsp, string listID)
         {
             IResponseList list = rsp.ResponseList;
             if (list == null || list.Count == 0) return;
