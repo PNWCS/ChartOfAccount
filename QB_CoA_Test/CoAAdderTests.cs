@@ -68,11 +68,6 @@ namespace QB_CoA_Test
                 {
                     var qbRet = QueryAccountByListID(qbSession, acct.QB_ID);
                     Assert.NotNull(qbRet);  // If null, we failed to find it in QB.
-<<<<<<< HEAD
-
-=======
-                    
->>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
                     // Optionally, you can also assert that fields match what was sent:
                     Assert.Equal(acct.Name, qbRet.Name.GetValue());
                     Assert.Equal(acct.AccountNumber, qbRet.AccountNumber?.GetValue());
@@ -128,10 +123,7 @@ namespace QB_CoA_Test
                 Debug.WriteLine($"AccountQuery status code: {response.StatusCode}, message: {response.StatusMessage}");
                 return null;
             }
-<<<<<<< HEAD
 
-=======
->>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
             if (response.Detail is IAccountRet accountRet)
             {
                 return accountRet;
@@ -149,10 +141,6 @@ namespace QB_CoA_Test
 
             //// We expect exactly one match if the ListID is correct
             //return (IAccountRet?)accountRetList;
-<<<<<<< HEAD
-=======
-
->>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
         }
 
         /// <summary>
@@ -163,17 +151,12 @@ namespace QB_CoA_Test
         {
             return accountType.ToLower() switch
             {
-<<<<<<< HEAD
-                "bank" => ENAccountType.atBank,
-                "expense" => ENAccountType.atExpense,
-                "income" => ENAccountType.atIncome,
-                _ => ENAccountType.atOtherAsset
-=======
+
                 "bank"    => ENAccountType.atBank,
                 "expense" => ENAccountType.atExpense,
                 "income"  => ENAccountType.atIncome,
                 _         => ENAccountType.atOtherAsset
->>>>>>> bd06d5c776c93d6ab706cd6c0708af6ebbb42ba4
+
             };
         }
 
