@@ -7,7 +7,7 @@ namespace QB_CoA_Lib
     {
         public static List<ChartOfAccount> CompareAccounts(List<ChartOfAccount> companyAccounts)
         {
-            Log.Information("CoAComparator Initialized.");
+            Log.Information("ChartOfAccountComparator Initialized");
 
             // Read Chart of Accounts from QuickBooks
             List<ChartOfAccount> qbAccounts = CoAReader.QueryAllCoAs();
@@ -103,7 +103,7 @@ namespace QB_CoA_Lib
                 }
             }
 
-            Log.Information("CoAComparator Completed.");
+            Log.Information("ChartOfAccountComparator Completed");
 
             // Merge results: prioritize company accounts
             Dictionary<string, ChartOfAccount> mergedAccountsDict = new Dictionary<string, ChartOfAccount>();
@@ -113,6 +113,12 @@ namespace QB_CoA_Lib
 
             foreach (var acct in companyAccountDict.Values)
                 mergedAccountsDict[acct.Name.Trim().ToLower()] = acct; // Overwrite with company accounts
+
+            List<ChartOfAccount> terms = mergedAccountsDict.Values.ToList();
+            foreach (var term in terms)
+            {
+                Log.Information($"Account {term.Name} is {term.Status}.");
+            }
 
             return mergedAccountsDict.Values.ToList();
         }

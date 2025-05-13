@@ -8,6 +8,8 @@ using Serilog;
 using QB_CoA_Lib;               // ChartOfAccount, ChartOfAccountComparator, etc.
 using QBFC16Lib;                // QuickBooks Desktop SDK
 using static QB_CoA_Test.CommonMethods;
+using static QB_CoA_Lib.ChartOfAccount;
+
 
 namespace QB_CoA_Test
 {
@@ -26,7 +28,7 @@ namespace QB_CoA_Test
             //------------------------------------------------------------------
             const string DEFAULT_ACCOUNT_TYPE = "Expense";
             var initialAccounts = new List<ChartOfAccount>();
-            var rand             = new Random();
+            var rand = new Random();
 
             EnsureLogFileClosed();
             DeleteOldLogFiles();
@@ -35,16 +37,16 @@ namespace QB_CoA_Test
             for (int i = 0; i < 5; i++)
             {
                 string acctNumber = rand.Next(10000, 99999).ToString();
-                string acctName   = $"TestCoA_{Guid.NewGuid():N}".Substring(0, 8);
-                string companyId  = $"CID_{Guid.NewGuid():N}".Substring(0, 8);
+                string acctName = $"TestCoA_{Guid.NewGuid():N}".Substring(0, 16);
+                string companyId = $"CID_{Guid.NewGuid():N}".Substring(0, 8);
 
                 initialAccounts.Add(new ChartOfAccount(DEFAULT_ACCOUNT_TYPE, acctNumber, acctName)
                 {
-                    CompanyID = companyId    //  Used as the business-key when comparing
+                    CompanyID = companyId   //  Used as the business-key when comparing
                 });
             }
 
-            List<ChartOfAccount>? firstCompareResult  = null;
+            List<ChartOfAccount>? firstCompareResult = null;
             List<ChartOfAccount>? secondCompareResult = null;
 
             try
@@ -52,10 +54,12 @@ namespace QB_CoA_Test
                 //------------------------------------------------------------------
                 // ②  First compare → every account should be *Added* to QB
                 //------------------------------------------------------------------
-                firstCompareResult = ChartOfAccountComparator.CompareAccounts(initialAccounts);
+
+                firstCompareResult = CoAComparator.CompareAccounts(initialAccounts);
 
                 foreach (var acct in firstCompareResult
-                                     .Where(a => initialAccounts.Any(x => x.CompanyID == a.CompanyID)))
+                                     .Where(a => initialAccounts.Any(x => x.Name.Trim().ToLower() == a.Name.Trim().ToLower())))
+
                 {
                     Assert.Equal(ChartOfAccountStatus.Added, acct.Status);
                 }
@@ -63,32 +67,37 @@ namespace QB_CoA_Test
                 //------------------------------------------------------------------
                 // ③  Mutate list to trigger *Missing* & *Different*
                 //------------------------------------------------------------------
-                var updatedAccounts  = new List<ChartOfAccount>(initialAccounts);
+                var updatedAccounts = new List<ChartOfAccount>(initialAccounts);
 
-                var acctToRemove     = updatedAccounts[0];           // → Missing
-                var acctToRename     = updatedAccounts[1];           // → Different
+                var acctToRemove = updatedAccounts[0];           // → Missing
+                var acctToRename = updatedAccounts[1];           // → Different
 
                 updatedAccounts.Remove(acctToRemove);
-                acctToRename.Name += "_Mod";
+                //acctToRename.Name += "_Mod";
+                acctToRename.AccountType = "Income";  // Different from original "Expense"
+
 
                 //------------------------------------------------------------------
                 // ④  Second compare → expect Missing, Different, Unchanged
                 //------------------------------------------------------------------
-                secondCompareResult = ChartOfAccountComparator.CompareAccounts(updatedAccounts);
-                var secondDict      = secondCompareResult.ToDictionary(a => a.CompanyID);
+
+                secondCompareResult = CoAComparator.CompareAccounts(updatedAccounts);
+                // !--------change here
+                //var secondDict      = secondCompareResult.ToDictionary(a => a.CompanyID);
+                var secondDict = secondCompareResult.ToDictionary(a => a.Name.Trim().ToLower());
 
                 // Missing
-                Assert.True(secondDict.ContainsKey(acctToRemove.CompanyID));
-                Assert.Equal(ChartOfAccountStatus.Missing, secondDict[acctToRemove.CompanyID].Status);
+                Assert.True(secondDict.ContainsKey(acctToRemove.Name.Trim().ToLower()));
+                Assert.Equal(ChartOfAccountStatus.Missing, secondDict[acctToRemove.Name.Trim().ToLower()].Status);
 
                 // Different
-                Assert.True(secondDict.ContainsKey(acctToRename.CompanyID));
-                Assert.Equal(ChartOfAccountStatus.Different, secondDict[acctToRename.CompanyID].Status);
+                Assert.True(secondDict.ContainsKey(acctToRename.Name.Trim().ToLower()));
+                Assert.Equal(ChartOfAccountStatus.Different, secondDict[acctToRename.Name.Trim().ToLower()].Status);
 
                 // Unchanged
                 var unaffectedIds = updatedAccounts
-                                    .Select(a => a.CompanyID)
-                                    .Except(new[] { acctToRename.CompanyID });
+                                    .Select(a => a.Name.Trim().ToLower())
+                                    .Except(new[] { acctToRename.Name.Trim().ToLower() });
 
                 foreach (var id in unaffectedIds)
                 {
@@ -125,7 +134,7 @@ namespace QB_CoA_Test
             string logs = File.ReadAllText(logFile);
 
             Assert.Contains("ChartOfAccountComparator Initialized", logs);
-            Assert.Contains("ChartOfAccountComparator Completed",  logs);
+            Assert.Contains("ChartOfAccountComparator Completed", logs);
 
             void AssertLogsFor(IEnumerable<ChartOfAccount>? accts)
             {
@@ -148,7 +157,7 @@ namespace QB_CoA_Test
         private static void DeleteAccount(QuickBooksSession qbSession, string listID)
         {
             IMsgSetRequest req = qbSession.CreateRequestSet();
-            IListDel delRq     = req.AppendListDelRq();
+            IListDel delRq = req.AppendListDelRq();
 
             delRq.ListDelType.SetValue(ENListDelType.ldtAccount);
             delRq.ListID.SetValue(listID);
